@@ -1,0 +1,12 @@
+[package]
+name = "rusty-gum"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.62"
+dialoguer = { git = "https://github.com/RobWalt/dialoguer", branch = "feat/multi-fuzz-selection", features = ["fuzzy-select"] }
+structopt = "0.3.26"
+structopt-derive = "0.4.18"
