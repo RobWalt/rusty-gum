@@ -1,7 +1,15 @@
 [package]
 name = "rusty-gum"
-version = "0.1.0"
+version = "0.0.0"
 edition = "2021"
+license = "MIT"
+keywords = ["cli", "gum", "dialoguer", "tool"]
+authors = ["Robert Walter <robwalter96@gmail.com>"]
+description = "A tool for rusty shell scripts"
+homepage = "https://github.com/RobWalt/rusty-gum"
+repository = "https://github.com/RobWalt/rusty-gum"
+documentation = "https://docs.rs/rusty-gum"
+readme = "README.md"
 
 [[bin]]
 path = "src/bin/main.rs"
