@@ -1,17 +1,14 @@
 use crate::parsing::*;
 use anyhow::{Error, Result};
 use dialoguer::theme::ColorfulTheme;
-use dialoguer::{MultiSelect, Select};
+use dialoguer::FuzzySelect;
 use structopt::StructOpt;
 
 use super::{get_stdin_items, pipe_to_stdout, select_index_items_from, validate_items_non_empty};
 
 #[derive(Debug, StructOpt)]
-#[structopt(about = "Choose from a list of items")]
-pub struct ChooseArgs {
-    #[structopt(long, default_value = "10", parse(try_from_str = parse_non_zero_usize), help = "Height of the list")]
-    height: usize,
-
+#[structopt(about = "Filter from a list of items")]
+pub struct FilterArgs {
     #[structopt(
         long,
         default_value = "single",
@@ -19,8 +16,17 @@ pub struct ChooseArgs {
         help = "Use single/multi selection"
     )]
     mode: SelectMode,
-    //
+
+    #[structopt(
+        long,
+        default_value = "Searching for ... ",
+        help = "Prompt to show in front of search term"
+    )]
+    prompt: String,
     // TODO: Add this when selection limit is available in dialoguer
+    //#[structopt(long, default_value = "10", parse(try_from_str = parse_non_zero_usize), help = "Height of the list")]
+    //height: usize,
+    //
     //#[structopt(
     //    long,
     //    default_value = "",
@@ -46,28 +52,27 @@ pub struct ChooseArgs {
     //limit: MaybeUnbounded,
 }
 
-pub fn exec_choose(choose_opts: ChooseArgs) -> Result<()> {
+pub fn exec_filter(filter_opts: FilterArgs) -> Result<()> {
     get_stdin_items()
         .and_then(validate_items_non_empty)
-        .and_then(choose_with_opts(choose_opts))
+        .and_then(filter_with_opts(filter_opts))
         .and_then(pipe_to_stdout)
 }
 
-fn choose_with_opts(choose_opts: ChooseArgs) -> impl FnOnce(Vec<String>) -> Result<Vec<String>> {
+fn filter_with_opts(filter_opts: FilterArgs) -> impl FnOnce(Vec<String>) -> Result<Vec<String>> {
     move |items| {
         let theme = ColorfulTheme::default();
 
-        match choose_opts.mode {
-            SelectMode::Single => Select::with_theme(&theme)
+        match filter_opts.mode {
+            SelectMode::Single => FuzzySelect::with_theme(&theme)
                 .items(&items)
-                .max_length(choose_opts.height)
+                .report(false)
+                .with_prompt(filter_opts.prompt)
                 .default(0)
                 .interact()
                 .map(|idx| vec![idx]),
-            SelectMode::Multi => MultiSelect::with_theme(&theme)
-                .items(&items)
-                .max_length(choose_opts.height)
-                .interact(),
+            // TODO add this when PR is merged
+            SelectMode::Multi => unimplemented!("Not implemented yet"),
         }
         .map_err(Error::from)
         .map(select_index_items_from(items))

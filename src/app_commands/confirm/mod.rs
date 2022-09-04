@@ -1,7 +1,7 @@
 use std::process::exit;
 
 use anyhow::{Error, Result};
-use dialoguer::Confirm as DConfirm;
+use dialoguer::Confirm;
 use structopt::StructOpt;
 
 #[derive(Debug)]
@@ -22,7 +22,7 @@ fn confirm_default_from_str(src: &str) -> Result<ConfirmDefault> {
 
 #[derive(Debug, StructOpt)]
 #[structopt(about = "Ask a user to confirm an action")]
-pub struct Confirm {
+pub struct ConfirmArgs {
     #[structopt(
         default_value = "Are you sure?",
         help = "Prompt question that needs to be confirmed"
@@ -44,8 +44,8 @@ pub struct Confirm {
     //negative: String,
 }
 
-pub fn exec_confirm(confirm_opts: Confirm) -> Result<()> {
-    DConfirm::new()
+pub fn exec_confirm(confirm_opts: ConfirmArgs) -> Result<()> {
+    Confirm::new()
         .wait_for_newline(true)
         .report(false)
         .with_prompt(&confirm_opts.prompt)
