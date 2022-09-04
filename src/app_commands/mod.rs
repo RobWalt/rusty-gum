@@ -2,6 +2,10 @@ mod choose;
 pub use choose::exec_choose;
 use choose::Choose;
 
+mod confirm;
+pub use confirm::exec_confirm;
+use confirm::Confirm;
+
 use structopt::StructOpt;
 
 #[derive(Debug, StructOpt)]
@@ -14,8 +18,8 @@ pub struct RGApp {
 #[derive(Debug, StructOpt)]
 pub enum Subcommands {
     Choose(Choose),
+    Confirm(Confirm),
     // TODO
-    // Confirm(Confirm),
     // Filter(Filter),
     // Format(Format),
     // Input(Input),
@@ -24,10 +28,6 @@ pub enum Subcommands {
     // Style(Style),
     // Write(Write),
 }
-
-#[derive(Debug, StructOpt)]
-#[structopt(about = "Ask a user to confirm an action")]
-pub struct Confirm {}
 
 #[derive(Debug, StructOpt)]
 #[structopt(about = "Filter from a list of items")]
