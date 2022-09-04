@@ -14,14 +14,15 @@ pub struct RGApp {
 #[derive(Debug, StructOpt)]
 pub enum Subcommands {
     Choose(Choose),
-    Confirm(Confirm),
-    Filter(Filter),
-    Format(Format),
-    Input(Input),
-    Join(Join),
-    Spin(Spin),
-    Style(Style),
-    Write(Write),
+    // TODO
+    // Confirm(Confirm),
+    // Filter(Filter),
+    // Format(Format),
+    // Input(Input),
+    // Join(Join),
+    // Spin(Spin),
+    // Style(Style),
+    // Write(Write),
 }
 
 #[derive(Debug, StructOpt)]

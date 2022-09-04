@@ -72,7 +72,8 @@ dependencies = [
 [[package]]
 name = "dialoguer"
 version = "0.10.2"
-source = "git+https://github.com/RobWalt/dialoguer?branch=feat/multi-fuzz-selection#00e0a80d0021808ab0c5d2354658d16e759b5f82"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a92e7e37ecef6857fdc0c0c5d42fd5b0938e46590c2183cc92dd310a6d078eb1"
 dependencies = [
  "console",
  "fuzzy-matcher",
@@ -211,7 +212,7 @@ dependencies = [
 
 [[package]]
 name = "rusty-gum"
-version = "0.1.0"
+version = "0.0.0"
 dependencies = [
  "anyhow",
  "dialoguer",
