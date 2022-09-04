@@ -72,7 +72,7 @@ dependencies = [
 [[package]]
 name = "dialoguer"
 version = "0.10.2"
-source = "git+https://github.com/RobWalt/dialoguer?branch=feat/multi-fuzz-selection#45707008a4d02d940e17944443372968b901d165"
+source = "git+https://github.com/RobWalt/dialoguer?branch=feat/multi-fuzz-selection#00e0a80d0021808ab0c5d2354658d16e759b5f82"
 dependencies = [
  "console",
  "fuzzy-matcher",
