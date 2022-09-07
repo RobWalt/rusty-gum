@@ -17,6 +17,6 @@ name = "rgum"
 
 [dependencies]
 anyhow = "1.0"
-dialoguer = { version = "0.10", features = ["fuzzy-select"] }
+dialoguer = { version = "0.10", features = ["fuzzy-select", "password"] }
 structopt = "0.3"
 structopt-derive = "0.4"
