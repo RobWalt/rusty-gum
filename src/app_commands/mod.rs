@@ -10,6 +10,10 @@ mod filter;
 pub use filter::exec_filter;
 use filter::FilterArgs;
 
+mod input;
+pub use input::exec_input;
+use input::InputArgs;
+
 use anyhow::{Error, Result};
 use std::io::Write;
 use std::io::{stdin, stdout};
@@ -27,9 +31,9 @@ pub enum Subcommands {
     Choose(ChooseArgs),
     Confirm(ConfirmArgs),
     Filter(FilterArgs),
+    Input(InputArgs),
     // TODO
     // Format(Format),
-    // Input(Input),
     // Join(Join),
     // Spin(Spin),
     // Style(Style),
@@ -39,10 +43,6 @@ pub enum Subcommands {
 #[derive(Debug, StructOpt)]
 #[structopt(about = "Format some text for pretty output")]
 pub struct Format {}
-
-#[derive(Debug, StructOpt)]
-#[structopt(about = "Prompt for single line input")]
-pub struct Input {}
 
 #[derive(Debug, StructOpt)]
 #[structopt(about = "Join text horizontally or vertically")]

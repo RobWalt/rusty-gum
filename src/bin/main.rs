@@ -1,7 +1,7 @@
 use std::process::exit;
 
 use anyhow::Result;
-use rusty_gum::{exec_choose, exec_confirm, exec_filter, RGApp, Subcommands};
+use rusty_gum::{exec_choose, exec_confirm, exec_filter, exec_input, RGApp, Subcommands};
 use structopt::StructOpt;
 
 fn main() -> Result<()> {
@@ -12,6 +12,7 @@ fn main() -> Result<()> {
         Subcommands::Choose(cmd_opts) => exec_choose(cmd_opts),
         Subcommands::Confirm(cmd_opts) => exec_confirm(cmd_opts),
         Subcommands::Filter(cmd_opts) => exec_filter(cmd_opts),
+        Subcommands::Input(cmd_opts) => exec_input(cmd_opts),
         _ => todo!(),
     }?;
     exit(0)
